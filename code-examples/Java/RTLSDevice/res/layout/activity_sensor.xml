@@ -1,0 +1,235 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:text="Label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/editLabel"
+            android:layout_column="2"
+            android:ems="10"
+            android:hint="label"
+            android:lines="1" />
+    </TableRow>
+
+    <View
+        android:layout_height="1dip"
+        android:background="#050505" />
+    
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0px"
+            android:layout_column="1"
+            android:layout_weight=".5"
+            android:enabled="false"
+            android:onClick="btn1Press"
+            android:text="Button 1" />
+        
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0px"
+            android:layout_column="2"
+            android:layout_weight=".5"
+            android:enabled="false"
+            android:onClick="btn2Press"
+            android:text="Button 2" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0px"
+            android:layout_column="1"
+            android:layout_weight=".5"
+            android:enabled="false"
+            android:onClick="btn3Press"
+            android:text="Button 3" />
+        
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0px"
+            android:layout_column="2"
+            android:layout_weight=".5"
+            android:enabled="false"
+            android:onClick="btn4Press"
+            android:text="Button 4" />
+
+    </TableRow>
+
+    <View
+    android:layout_height="1dip"
+    android:background="#050505" />
+    
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <Button
+            android:id="@+id/buttonLowBatt"
+            android:layout_width="0px"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:onClick="btnLowBatteryPress"
+            android:text="Simulate Low Battery" />
+
+    </TableRow>
+
+    <View
+    android:layout_height="1dip"
+    android:background="#050505" />
+    
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <Button
+            android:id="@+id/buttonMove"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0px"
+            android:layout_column="1"
+            android:layout_weight=".3"
+            android:enabled="false"
+            android:onClick="btnLocationChangePress"
+            android:text="Move to" />
+  
+  <EditText
+      android:id="@+id/editLocationId"
+      android:layout_width="0px"
+      android:layout_column="2"
+      android:layout_weight=".7"
+      android:ems="10"
+      android:enabled="false"
+      android:hint="Location ID"
+      android:lines="1"
+      android:maxLength="6" />
+    
+    </TableRow>
+
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configuration" />
+
+		<TableLayout
+			android:id="@+id/content"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" >
+			
+			<TableRow
+			    android:id="@+id/tableRow1"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" >
+			
+			    <TextView
+			        android:id="@+id/textViewHostIP"
+			        android:layout_width="wrap_content"
+			        android:layout_column="1"
+			        android:text="Host IP"
+			        android:textAppearance="?android:attr/textAppearanceMedium" />
+			
+			    <EditText
+			        android:id="@+id/editHostIP"
+			        android:layout_column="2"
+			        android:ems="10"
+			        android:lines="1"
+			        android:text="10.0.2.2" />
+			
+			</TableRow>
+			
+			<TableRow
+			    android:id="@+id/tableRow2"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" >
+			
+			    <TextView
+			        android:id="@+id/textViewUserName"
+			        android:layout_width="wrap_content"
+			        android:layout_column="1"
+			        android:text="User Name"
+			        android:textAppearance="?android:attr/textAppearanceMedium" />
+			
+			    <EditText
+			        android:id="@+id/editUserName"
+			        android:layout_column="2"
+			        android:ems="10"
+			        android:lines="1" />
+			</TableRow>
+			
+			<TableRow
+			    android:id="@+id/tableRow3"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" >
+			
+			    <TextView
+			        android:id="@+id/textViewPassword"
+			        android:layout_width="wrap_content"
+			        android:layout_column="1"
+			        android:text="Password"
+			        android:textAppearance="?android:attr/textAppearanceMedium" />
+			
+			    <EditText
+			        android:id="@+id/editPassword"
+			        android:layout_column="2"
+			        android:ems="10"
+			        android:lines="1" />
+			</TableRow>
+			
+			<TableRow
+			    android:id="@+id/tableRow4"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" >
+			
+			    <TextView
+			        android:id="@+id/textViewPort"
+			        android:layout_width="wrap_content"
+			        android:layout_column="1"
+			        android:text="Port Number"
+			        android:textAppearance="?android:attr/textAppearanceMedium" />
+			
+			    <EditText
+			        android:id="@+id/editPort"
+			        android:layout_column="2"
+			        android:ems="10"
+			        android:lines="1"
+			        android:inputType="number"
+			        android:text="80" />
+			</TableRow>
+        
+		</TableLayout>
+	</SlidingDrawer>
+
+</TableLayout>
+
+

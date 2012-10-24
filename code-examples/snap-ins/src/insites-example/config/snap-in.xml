@@ -1,0 +1,56 @@
+<!--
+  ~ Copyright (c) Intelligent InSites. All rights reserved.
+  ~ http://www.intelligentinsites.com
+  -->
+
+<snap-in
+        xmlns="http://www.intelligentinsites.com/xml/ns/snap-in"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.intelligentinsites.com/xml/ns/snap-in http://www.intelligentinsites.com/xml/ns/snap-in.xsd"
+
+        provider="insites" id="example">
+    <name>InSites Example Snapin</name>
+    <summary></summary>
+    <description></description>
+    <version>0.1</version>
+    <vendor>
+        <name>Intelligent InSites</name>
+        <address>102 Broadway</address>
+        <address>Suite 200</address>
+        <address>Fargo, ND</address>
+        <support-email>support@IntelligentInSites.com</support-email>
+        <support-phone>(866) 520-9113</support-phone>
+        <support-message></support-message>
+    </vendor>
+    <dependencies>
+        <platform versions="4.0"/>
+    </dependencies>
+    <web>
+        <tabs>
+            <tab id="insites-tab-example">
+                <name>Example</name>
+                <icon>/web/icon.png</icon>
+            </tab>
+        </tabs>
+        <page id="insites-example-page-staff" tab="insites-tab-example">
+            <name>Staff Lister</name>
+            <content type="iframe">
+                <view>http://localhost:8080/StaffLister/</view>
+            </content>
+        </page>
+    </web>
+
+    <services>
+		<service>
+            <script>staff-daily-unique-locations.rb</script>
+			<get>staff-daily-unique-locations.xml</get>
+			<get>staff-daily-unique-locations.json</get>
+        </service>
+    </services>
+	
+	<data>
+		<resource name="staff">
+			<attribute name="floor-changes" element-type="number"/>
+        </resource>
+	</data>
+</snap-in>

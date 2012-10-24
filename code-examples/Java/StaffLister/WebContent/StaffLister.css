@@ -1,0 +1,59 @@
+#staff {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	background: #fff;
+	margin: 45px;
+	width: 480px;
+	border-collapse: collapse;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+#staff th {
+	font-size: 14px;
+	font-weight: normal;
+	color: #039;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
+}
+#staff td {
+	border-bottom: 1px solid #ccc;
+	color: #669;
+	padding: 6px 8px;
+}
+#staff tbody tr:hover td {
+	color: #009;
+}
+
+
+
+ul {
+	border: 0;
+	padding: 0;
+	text-align: center;
+}
+#pagination li {
+	display:inline;
+	list-style-type:none;
+}
+#pagination a {
+	border:solid 1px #DDDDDD;
+	margin-right:2px;
+}
+#pagination .next a,
+#pagination .previous a {
+	font-weight:bold;
+	border:solid 1px #DDDDDD;
+}
+#pagination .previous-disabled,
+#pagination .next-disabled {
+	color:#666666;
+	font-weight:bold;
+}
+#pagination a:hover {
+	border:solid 1px #666666;
+}
+#pagination .active {
+	color:#ff0084;
+	font-weight:bold;
+}
