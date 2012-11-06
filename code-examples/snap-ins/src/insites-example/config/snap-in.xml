@@ -49,6 +49,15 @@
     </services>
 	
 	<data>
+		<resource name="location">
+			<attribute name="bathrooms" element-type="number"/>
+			<attribute name="last-used" element-type="datetime"/>
+			<attribute name="address" element-type="string"/>
+			<attribute name="bed-type" element-type="resource" resource-type="equipment-type"/>
+			<attribute name="wall-colors" element-type="string" collection="true"/>
+			<attribute name="star-ratings" element-type="number" collection="true"/>
+			<attribute name="required-equipment-types" element-type="resource" resource-type="equipment-type" collection="true"/>
+		</resource>
 		<resource name="staff">
 			<attribute name="floor-changes" element-type="number"/>
         </resource>

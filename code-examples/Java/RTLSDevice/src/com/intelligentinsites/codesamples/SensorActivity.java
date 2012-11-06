@@ -5,14 +5,8 @@ import java.util.ArrayList;
 
 import com.intelligentinsites.codesamples.R;
 
-import android.R.drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
