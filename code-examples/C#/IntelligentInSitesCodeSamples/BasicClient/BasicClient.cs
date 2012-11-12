@@ -69,11 +69,14 @@ namespace IntelligentInSites.CodeSamples {
         /// <param name="host">The hostname of the InSites server.</param>
         /// <param name="username">A username associated with an InSites login.</param>
         /// <param name="password">The password of the specified user.</param>
-        public BasicClient(string host, string username, string password) {
+        public BasicClient(string host, string username, string password, bool useSSL = false) {
             Byte[] byteAuthorizationToken = System.Text.Encoding.ASCII.GetBytes(username + ":" + password);
             this.authHeaderValue =  Convert.ToBase64String(byteAuthorizationToken);
             this.hostIP = host;
-            this.protocol = "http://";
+            if (useSSL)
+                this.protocol = "https://";
+            else
+                this.protocol = "http://";
             this.sessionCookie = string.Empty;
         }
 

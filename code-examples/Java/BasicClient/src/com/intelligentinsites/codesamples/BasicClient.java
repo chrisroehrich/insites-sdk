@@ -37,23 +37,43 @@ import java.util.Map;
 public class BasicClient {
     private String authHeaderValue = null;
     private DefaultHttpClient client = null;
+    private int port = 80;
+    private String scheme = "http";
 
+    
     /**
-     * BasicClient constructor.
+     * BasicClient constructor using HTTP over port 80.
      * 
      * @param host		the hostname of the InSites server
      * @param username	a username associated with an InSites login
      * @param password	the password of the specified user
      */
     public BasicClient(String host, String username, String password) {
+    	this(host, username, password, false);
+    }
+    
+    /**
+     * BasicClient constructor.
+     * 
+     * @param host		the hostname of the InSites server
+     * @param username	a username associated with an InSites login
+     * @param password	the password of the specified user
+     * @param useSSL	true to use HTTPS over port 443. By default BasicClient will use HTTP over port 80.
+     */
+    public BasicClient(String host, String username, String password, boolean useSSL) {
+    	if (useSSL) {
+    		this.scheme = "https";
+    		this.port = 443;
+    	}
         client = new DefaultHttpClient();
-        client.getParams().setParameter(ClientPNames.DEFAULT_HOST, new HttpHost(host, 80, "http"));
+        client.getParams().setParameter(ClientPNames.DEFAULT_HOST, new HttpHost(host, port, scheme));
         HttpProtocolParams.setUserAgent(client.getParams(), "InSites Java Connection");
         client.setCookieStore(new BasicCookieStore());
 
         client.getCredentialsProvider().setCredentials(new AuthScope(host, 80), new UsernamePasswordCredentials(username, password));
         client.getCredentialsProvider().setCredentials(new AuthScope(host, 443), new UsernamePasswordCredentials(username, password));
         authHeaderValue = "Basic " + Base64.encodeBase64String((username + ":" + password).getBytes());
+        System.out.println("2");
     }
     
     /**

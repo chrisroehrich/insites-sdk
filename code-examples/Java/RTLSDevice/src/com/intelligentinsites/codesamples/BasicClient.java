@@ -38,6 +38,18 @@ import java.util.Map;
 public class BasicClient {
     private String authHeaderValue = null;
     private DefaultHttpClient client = null;
+    private String scheme = "http";
+    
+    /**
+     * BasicClient constructor using HTTP over port 80.
+     * 
+     * @param host		the hostname of the InSites server
+     * @param username	a username associated with an InSites login
+     * @param password	the password of the specified user
+     */
+    public BasicClient(String host, String username, String password) {
+    	this(host, username, password, 80);
+    }
     
     /**
      * BasicClient constructor.
@@ -45,11 +57,14 @@ public class BasicClient {
      * @param host		the hostname of the InSites server
      * @param username	a username associated with an InSites login
      * @param password	the password of the specified user
-     * @param portnum	the port
+     * @param portnum	the port number to use for HTTP communication. Using port 443 will enable SSL.
      */
     public BasicClient(String host, String username, String password, int portnum) {
+    	if (portnum == 443) {
+    		this.scheme = "https";
+    	}
         client = new DefaultHttpClient();
-        client.getParams().setParameter(ClientPNames.DEFAULT_HOST, new HttpHost(host, portnum, "http"));
+        client.getParams().setParameter(ClientPNames.DEFAULT_HOST, new HttpHost(host, portnum, scheme));
         HttpProtocolParams.setUserAgent(client.getParams(), "InSites Java Connection");
         client.setCookieStore(new BasicCookieStore());
 
@@ -57,18 +72,6 @@ public class BasicClient {
         
         //We can not use org.apache.commons.codec.binary.Base64, so use the equivalent Android encoder
         authHeaderValue = "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP);
-    }
-    
-    /**
-     * BasicClient constructor using the default HTTP port 80.
-     * 
-     * @param host		the hostname of the InSites server
-     * @param username	a username associated with an InSites login
-     * @param password	the password of the specified user
-     * @param portnum	the port number to use for HTTP communication
-     */
-    public BasicClient(String host, String username, String password) {
-    	this(host, username, password, 80);
     }
 
     /**

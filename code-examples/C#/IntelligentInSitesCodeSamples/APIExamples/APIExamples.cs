@@ -12,7 +12,9 @@ using System.Text;
 namespace IntelligentInSites.CodeSamples {
     class APIExamples {
         static void Main(string[] args) {
-            BasicClient client = new BasicClient("http://insites-dev.intelligentinsites.net", "username", "password");
+            //BasicClient client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
+            BasicClient client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password", true); //Use HTTPS
+
             ApiResponse response;
 
             //// limit

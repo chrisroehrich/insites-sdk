@@ -12,11 +12,12 @@ import com.intelligentinsites.codesamples.BasicClient;
 public class APIExamples {
 	static BasicClient client;
     public static void main(String[] args) {
-    	client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
+    	//client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
+    	client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password", true); //Use HTTPS
     	
         //// limit
-    	System.out.println(client.get("/api/2.0/rest/equipment.xml"));			//Get 100 equipment resources
-    	//System.out.println(client.get("/api/2.0/rest/equipment.xml?limit=3"));	//Get 3 equipment resources
+    	//System.out.println(client.get("/api/2.0/rest/equipment.xml"));			//Get 100 equipment resources
+    	System.out.println(client.get("/api/2.0/rest/equipment.xml?limit=3"));	//Get 3 equipment resources
     	//System.out.println(client.get("/api/2.0/rest/equipment.xml?limit=-1"));	//Get all equipment resources
         
         //// limit + first-result

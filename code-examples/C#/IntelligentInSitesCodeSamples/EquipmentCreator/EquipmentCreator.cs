@@ -16,7 +16,7 @@ using System.Net;
 namespace IntelligentInSites.CodeSamples {
     class EquipmentCreator {
         static void Main(string[] args) {
-            BasicClient client = new BasicClient("http://insites-dev.intelligentinsites.net", "username", "password");
+            BasicClient client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
 
             //Get the required parameters from user
             Console.Write("name <IV Pole>: ");
