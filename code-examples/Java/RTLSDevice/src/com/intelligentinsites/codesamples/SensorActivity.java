@@ -61,17 +61,17 @@ public class SensorActivity extends Activity {
     
     public void btn2Press(View view) {
     	CallAPITask task = new CallAPITask();
-    	task.execute(String.format("/api/2.0/rest/sensors/by-key/other-rtls/%s/button-press.xml?button=1", editLabel.getText()));
+    	task.execute(String.format("/api/2.0/rest/sensors/by-key/other-rtls/%s/button-press.xml?button=2", editLabel.getText()));
     }
     
     public void btn3Press(View view) {
     	CallAPITask task = new CallAPITask();
-    	task.execute(String.format("/api/2.0/rest/sensors/by-key/other-rtls/%s/button-press.xml?button=1", editLabel.getText()));
+    	task.execute(String.format("/api/2.0/rest/sensors/by-key/other-rtls/%s/button-press.xml?button=3", editLabel.getText()));
     }
     
     public void btn4Press(View view) {
     	CallAPITask task = new CallAPITask();
-    	task.execute(String.format("/api/2.0/rest/sensors/by-key/other-rtls/%s/button-press.xml?button=1", editLabel.getText()));
+    	task.execute(String.format("/api/2.0/rest/sensors/by-key/other-rtls/%s/button-press.xml?button=4", editLabel.getText()));
     }
     
     public void btnLowBatteryPress(View view) {
