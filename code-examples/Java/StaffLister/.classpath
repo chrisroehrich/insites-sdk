@@ -8,7 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/BasicClient"/>
 	<classpathentry kind="lib" path="lib/javax.servlet_3.0.0.v201112011016.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

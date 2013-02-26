@@ -3,9 +3,11 @@
 
 This simple console application demonstrates using the Intelligent InSites Web 
 Services API to create new equipment from data entered into a command line. 
-This class implements the BasicClient class to perform HTTP requests.*/
+This class implements the APIClient class to perform HTTP requests.*/
 
 package com.intelligentinsites.codesamples;
+
+import com.intelligentinsites.api.APIClient;
 
 import org.w3c.dom.Document;
 
@@ -19,7 +21,7 @@ import java.util.Scanner;
 
 public class EquipmentCreator {
     public static void main(String[] args) {
-        BasicClient client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
+        APIClient client = new APIClient("insites-dev.intelligentinsites.net", "username", "password");
 
         System.out.println("Creating a new equipment resource...");
 

@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.intelligentinsites.codesamples.BasicClient;
+import com.intelligentinsites.api.APIClient;
 
 /**
  * Servlet implementation class StaffLister
@@ -32,13 +32,13 @@ import com.intelligentinsites.codesamples.BasicClient;
 public class StaffLister extends HttpServlet {
 	private final int resultsPerPage = 5;
 	private static final long serialVersionUID = 1L;
-	BasicClient inSitesConnection;
+	APIClient inSitesConnection;
 
     /**
      * Default constructor. 
      */
     public StaffLister() {
-        inSitesConnection = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
+        inSitesConnection = new APIClient("insites-dev.intelligentinsites.net", "username", "password");
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
