@@ -1,0 +1,1 @@
+Please see the Snap-In Framework documentation on http://doc.intelligentinsites.net/devdoc

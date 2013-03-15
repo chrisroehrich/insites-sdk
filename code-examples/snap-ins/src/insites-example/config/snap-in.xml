@@ -46,6 +46,10 @@
 			<get>staff-daily-unique-locations.xml</get>
 			<get>staff-daily-unique-locations.json</get>
         </service>
+		<service>
+            <script>wavemark-users.rb</script>
+			<get>wavemark-users.xml</get>
+        </service>
     </services>
 	
 	<data>
