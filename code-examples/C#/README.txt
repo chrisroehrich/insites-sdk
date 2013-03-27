@@ -1,1 +1,0 @@
-The C# examples included in this directory are part of a Visual Studio 2010 solution. Just extract the source files as needed.
