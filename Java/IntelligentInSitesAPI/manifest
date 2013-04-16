@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Class-Path: lib/commons-codec-1.6/commons-codec-1.6.jar lib/commons-io-2.4/commons-io-2.4.jar lib/httpcomponents-client-4.2.3/lib/commons-logging-1.1.1.jar lib/httpcomponents-client-4.2.3/lib/httpclient-4.2.3.jar lib/httpcomponents-client-4.2.3/lib/httpcore-4.2.2.jar
+Class-Path: lib/commons-codec-1.6/commons-codec-1.6.jar lib/commons-io-2.4/commons-io-2.4.jar lib/httpcomponents-client-4.2.3/lib/commons-logging-1.1.1.jar lib/httpcomponents-client-4.2.3/lib/httpclient-4.2.3.jar lib/httpcomponents-client-4.2.3/lib/httpcore-4.2.2.jar lib/httpcomponents-client-4.2.3/lib/httpmime-4.2.3.jar

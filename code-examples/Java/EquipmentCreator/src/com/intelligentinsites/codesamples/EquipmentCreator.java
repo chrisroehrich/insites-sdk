@@ -8,6 +8,7 @@ This class implements the APIClient class to perform HTTP requests.*/
 package com.intelligentinsites.codesamples;
 
 import com.intelligentinsites.api.APIClient;
+import com.intelligentinsites.api.APIParams;
 
 import org.w3c.dom.Document;
 
@@ -42,13 +43,13 @@ public class EquipmentCreator {
         System.out.print("service-status <Bxc>: ");
         String serviceStatus = scanner.nextLine().trim();
 
-        //Build a Map of parameters
-        Map<String, Object> createParams = new HashMap<String, Object>();
-        createParams.put("name", name);
-        createParams.put("shortName", shortName);
-        createParams.put("type", type);
-        createParams.put("status", status);
-        createParams.put("serviceStatus", serviceStatus);
+        //Build a set of parameters
+        APIParams createParams = new APIParams();
+        createParams.add("name", name);
+        createParams.add("shortName", shortName);
+        createParams.add("type", type);
+        createParams.add("status", status);
+        createParams.add("serviceStatus", serviceStatus);
         
         //Perform a POST request to create a resource
         String createResponse = client.post("/api/2.0/rest/equipment.xml", createParams);
@@ -65,8 +66,9 @@ public class EquipmentCreator {
         System.out.print("Sensor to assign <provider.label>: ");
         String sensorId = scanner.nextLine().trim();
 
-        Map<String, Object> assignParams = new HashMap<String, Object>();
-        assignParams.put("sensor", sensorId);
+        //Map<String, Object> assignParams = new HashMap<String, Object>();
+        APIParams assignParams = new APIParams();
+        assignParams.add("sensor", sensorId);
         
         String assignResponse = client.post("/api/2.0/rest/equipment/"+equipmentId+"/take-sensor.xml", assignParams);
         System.out.println("Assigned a sensor to the new equipment. The web service responded with:");

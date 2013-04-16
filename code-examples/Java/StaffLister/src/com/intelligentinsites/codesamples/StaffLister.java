@@ -25,6 +25,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import com.intelligentinsites.api.APIClient;
+import com.intelligentinsites.api.APIParams;
 
 /**
  * Servlet implementation class StaffLister
@@ -48,12 +49,12 @@ public class StaffLister extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//construct HTTP request
-		Map<String, Object> getParams = new HashMap<String, Object>();
-		getParams.put("filter", "current-location in '" + location + "'");
-		getParams.put("first-result", (pageNumber - 1) * resultsPerPage);
-		getParams.put("limit", resultsPerPage);
-		getParams.put("sort", "name");
-		getParams.put("select", "current-location.name,name,status.name,type.name");
+		APIParams getParams = new APIParams();
+		getParams.add("filter", "current-location in '" + location + "'");
+		getParams.add("first-result", Integer.toString((pageNumber - 1) * resultsPerPage));
+		getParams.add("limit", Integer.toString(resultsPerPage));
+		getParams.add("sort", "name");
+		getParams.add("select", "current-location.name,name,status.name,type.name");
         
 		String inSitesResponseBody = inSitesConnection.get("/api/2.0/rest/staff.xml", getParams);
 		
