@@ -9,18 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IntelligentInSites.Api.Rest;
+using System.IO;
 
 namespace IntelligentInSites.CodeSamples {
     class APIExamples {
         static void Main(string[] args) {
-            //BasicClient client = new BasicClient("insites-dev.intelligentinsites.net", "username", "password");
-            ApiClient client = new ApiClient("insites-dev.intelligentinsites.net", "username", "password", true); //Use HTTPS
+            APIClient client = new APIClient(UriScheme.Https, "insites.dev.insitescloud.com", "username", "password", 443);
 
-            ApiResponse response;
+            APIResponse response;
 
             //// limit
-            response = client.Get("/api/2.0/rest/equipment.xml", String.Empty);   //Get 100 equipment resources
-            //response = client.Get("/api/2.0/rest/equipment.xml", "limit=3");      //Get 3 equipment resources
+            //response = client.Get("/api/2.0/rest/equipment.xml", String.Empty);   //Get 100 equipment resources
+            response = client.Get("/api/2.0/rest/equipment.xml", "limit=3");      //Get 3 equipment resources
             //response = client.Get("/api/2.0/rest/equipment.xml", "limit=-1");     //Get all equipment resources
 
             //// limit + first-result
@@ -65,14 +65,65 @@ namespace IntelligentInSites.CodeSamples {
             //response = client.Get("/api/2.0/rest/equipment.xml", "filter=sensors.filter(not-reporting+eq+'false').total-count+gt+0");		//Get equipment with at least one sensor that is not reporting
             //response = client.Get("/api/2.0/rest/locations.xml", "filter=parent-hierarchy.filter(name+eq+'Campus+1').total-count+gt+0");	//Get descendant locations of 'Campus 1'.
 
+
+
             //// Creating, Deleting, and Modifying Data
-            //response = client.Post("/api/2.0/rest/equipment.xml", "name=Wheelchair+1&service-status=Bxc&short-name=wc1&status=Bxc&type=Bxc6x");	                                //Create a new equipment resource named 'Wheelchair 1'
-            //response = client.Post("/api/2.0/rest/equipment/Bxj.xml", "model=X4000");															                                    //Update an existing equipment resource by changing the model to 'X4000'
-            //response = client.Post("/api/2.0/rest/sensors/Bxrx/button-press.xml", "button=2");													                                //Inform InSites that button 2 was pressed on sensor 'Bxrx'
-            //response = client.Post("/api/2.0/rest/sensors/by-key/ekahau-rtls/00:18:8e:20:44:a7/move.xml", "new-location=BxdL");	                                                //Inform InSites that the sensor with key/value (ekahau-rtls/00:18:8e:20:44:a7) has moved to location 'BxdL'
-            //response = client.Post("/api/2.0/rest/locations/Bxc.xml", "attributes.insites.assigned-patient=Bxzkw");                                                               //Assign a value to the custom attribute assigned-patient
-            //response = client.Post("/api/2.0/rest/locations/Bxc.xml", "attributes.insites.assigned-patient=");                                                                    //Clear the value of the custom attribute assigned-patient
-            //response = client.Post("/api/2.0/rest/locations/BxjL.xml", "attributes.insites.required-equipment-types=Bxc7L&attributes.insites.required-equipment-types=Bxc7R");    //Assign multiple values to a custom attribute collection
+            APIParams p = new APIParams();
+
+            //Create a new equipment resource named 'Wheelchair 35'
+            /*
+            p.Add("name", "Wheelchair 35");
+            p.Add("service-status", "Bxc");
+            p.Add("short-name", "wc35");
+            p.Add("status", "Bxc");
+            p.Add("type", "Bxc6x");
+            response = client.Post("/api/2.0/rest/equipment.xml", p);
+            */
+
+            //Update an existing equipment resource by changing the model to 'X4000'
+            /*
+            p.Add("model", "X4000");
+            response = client.Post("/api/2.0/rest/equipment/Bxj.xml", p);
+            */
+
+            //Inform InSites that button 2 was pressed on sensor 'Bxrx'
+            /*
+            p.Add("button", 2);
+            response = client.Post("/api/2.0/rest/sensors/Bxrx/button-press.xml", p);
+            */
+
+            //Inform InSites that the sensor with key/value (ekahau-rtls/00:18:8e:20:44:a7) has moved to location 'BxdL'
+            /*
+            p.Add("new-location", "BxdL");
+            response = client.Post("/api/2.0/rest/sensors/by-key/ekahau-rtls/00:18:8e:20:44:a7/move.xml", p);
+            */
+
+            //Assign a value to the custom attribute assigned-patient
+            /*
+            p.Add("attributes.insites.assigned-patient", "Bxzkw");
+            response = client.Post("/api/2.0/rest/locations/Bxc.xml", p);
+            */
+
+            //Clear the value of the custom attribute assigned-patient
+            /*
+            p.Add("attributes.insites.assigned-patient", String.Empty);
+            response = client.Post("/api/2.0/rest/locations/Bxc.xml", p);
+            */
+
+            //Assign multiple values to a custom attribute collection
+            /*
+            p.Add("attributes.insites.assigned-patient", "Bxc7L");
+            p.Add("attributes.insites.assigned-patient", "Bxc7R");
+            response = client.Post("/api/2.0/rest/locations/BxjL.xml", p);
+            */
+
+            //Upload a file into a new binary-data resource.
+    	    /*
+            p.Add("original-file-name", "wheelchair.png");
+    	    p.Add("data", File.ReadAllBytes(@"C:\data\wheelchair.png"));
+    	    p.Add("mime-type", "image/png");
+    	    response = client.PostMultipart("/api/2.0/rest/binary-data.xml", p);
+            */
 
             Console.WriteLine(response.ResponseData);
             Console.ReadLine();

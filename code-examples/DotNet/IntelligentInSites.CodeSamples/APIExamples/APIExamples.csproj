@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IntelligentInSites.Api">
+    <Reference Include="IntelligentInSites.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\DotNet\IntelligentInSites.Api\dist\IntelligentInSites.Api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
