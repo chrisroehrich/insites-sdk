@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright (c) Intelligent InSites. All rights reserved.
+  ~ http://www.intelligentinsites.com
+  -->
+
+<snap-in
+        xmlns="http://www.intelligentinsites.com/xml/ns/snap-in"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.intelligentinsites.com/xml/ns/snap-in http://www.intelligentinsites.com/xml/ns/snap-in-v1.2.xsd"
+
+        provider="example" id="example-assetmgmt">
+    <name>Asset Management</name>
+    <summary></summary>
+    <description></description>
+    <version>0.1</version>
+    <vendor>
+        <name>Intelligent InSites</name>
+        <address>102 Broadway</address>
+        <address>Suite 200</address>
+        <address>Fargo, ND</address>
+        <support-email>support@IntelligentInSites.com</support-email>
+        <support-phone>(866) 520-9113</support-phone>
+        <support-message></support-message>
+    </vendor>
+    <dependencies>
+        <platform versions="4.3"/>
+    </dependencies>
+    <web>
+        <tabs>
+            <tab id="example-tab-assetmgmt">
+                <name>Asset Management</name>
+                <icon>/web/icon.png</icon>
+            </tab>
+        </tabs>
+        <page id="example-assetmgmt-page-statuses" tab="example-tab-assetmgmt">
+            <name>Statuses</name>
+            <content type="iframe">
+                <view ui="core-ui-default">/snap-in/example/assetmgmt/service/statuses.html</view>
+            </content>
+        </page>
+    </web>
+    <services>
+        <service>
+            <script>statuses.rb</script>
+            <get>statuses.html</get>
+        </service>
+    </services>
+</snap-in>
