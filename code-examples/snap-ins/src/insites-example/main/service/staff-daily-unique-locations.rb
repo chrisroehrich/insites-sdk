@@ -5,19 +5,16 @@
 require 'nokogiri'
 require 'set'
 require 'json'
-java_import 'java.util.Date'
-java_import 'java.text.SimpleDateFormat'
+require 'date'
+require 'time'
 
 @log = @sandbox.log("staff-daily-unique-locations")
 
 response_format = @sandbox.request.url.split('.')[-1]
 
-#get the current datetime
-now_time = Date.new
-
 #get the time at midnight on today's date
-date_format = SimpleDateFormat.new("yyyy-MM-dd'T00:00:00.000'Z")
-midnight_time = date_format.format(now_time)
+now_time = Time.now
+midnight_time = DateTime.new(now_time.year, now_time.month, now_time.day, 0, 0, 0, 0).strftime('%Y-%m-%dT%H:%M:%S%:z')
 
 #parse the list of staff ids
 staff_ids = @sandbox.request.parameters['staff'].split(',')
@@ -31,6 +28,8 @@ staff_ids.each_with_index do |id, i|
     end
 end
 filter << ")"
+
+@log.warn(filter)
 
 #get movement history for the requested staff
 history_xml = Nokogiri::XML(@sandbox.httpGet("/api/2.0/rest/history/movements/staff.xml", {'filter'=>filter, 'select'=>'location,staff'}))
