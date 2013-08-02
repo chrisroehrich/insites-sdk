@@ -19,8 +19,8 @@ namespace IntelligentInSites.CodeSamples {
             APIResponse response;
 
             //// limit
-            //response = client.Get("/api/2.0/rest/equipment.xml", String.Empty);   //Get 100 equipment resources
-            response = client.Get("/api/2.0/rest/equipment.xml", "limit=3");      //Get 3 equipment resources
+            response = client.Get("/api/2.0/rest/equipment.xml", String.Empty);   //Get 100 equipment resources
+            //response = client.Get("/api/2.0/rest/equipment.xml", "limit=3");      //Get 3 equipment resources
             //response = client.Get("/api/2.0/rest/equipment.xml", "limit=-1");     //Get all equipment resources
 
             //// limit + first-result

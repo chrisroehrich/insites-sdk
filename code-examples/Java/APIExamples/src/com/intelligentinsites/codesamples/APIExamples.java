@@ -15,7 +15,7 @@ import com.intelligentinsites.api.APIParams;
 public class APIExamples {
 	static APIClient client;
     public static void main(String[] args) {
-    	client = new APIClient("insites.dev.insitescloud.com", "username", "password");
+    	client = new APIClient(APIClient.URIScheme.HTTPS, "insites.dev.insitescloud.com", "username", "password", 443);
     	
         //// limit
     	//System.out.println(client.get("/api/2.0/rest/equipment.xml"));			//Get 100 equipment resources
@@ -45,9 +45,8 @@ public class APIExamples {
         //System.out.println(client.get("/api/2.0/rest/staff.xml?sort=current-location.name&sort=name"));	//Sort all staff by location name, then by name
     	
     	//// filter
-        //System.out.println(client.get("/api/2.0/rest/equipment.xml?filter=manufacturer~'Ekahau'"));																		//Get equipment where the manufacturer field is 'Ekahau'
-        //System.out.println(client.get("/api/2.0/rest/equipment.xml?filter=manufacturer+eq+'Ekahau'"));
-        //System.out.println(client.get("/api/2.0/rest/equipment.xml?filter=manufacturer~'Ekahau'+and+current-location.name~'BioMed'"));									//Get equipment where manufacturer = 'Ekahau' and current location name = 'BioMed'
+        //System.out.println(client.get("/api/2.0/rest/equipment.xml?filter=manufacturer+eq+'Ekahau'"));																	//Get equipment where the manufacturer field is 'Ekahau'
+        //System.out.println(client.get("/api/2.0/rest/equipment.xml?filter=manufacturer+eq+'Ekahau'+and+current-location.name+eq+'BioMed'"));								//Get equipment where manufacturer = 'Ekahau' and current location name = 'BioMed'
         //System.out.println(client.get("/api/2.0/rest/patient-visits.xml?filter=status.name+eq+'In+Prep'+and+(type.name+eq+'ER+Patient'+or+type.name+eq+'OR+Patient')"));	//Get patient-visits with a status of 'In Prep', and whose type is either 'ER Patient', or 'OR Patient'
         //System.out.println(client.get("/api/2.0/rest/entities.xml?filter=sensors.total-count+gt+0"));																		//Get entities with attached sensors
         //System.out.println(client.get("/api/2.0/rest/sensors.xml?filter=entity-attached-to.element-type+eq+'equipment'")); 												//Get sensors attached to any equipment
@@ -77,7 +76,7 @@ public class APIExamples {
     	params.add("service-status", "Bxc");
     	params.add("telemetry-ranges", "Bxk");
     	params.add("telemetry-ranges", "Bxx");
-    	System.out.println(client.post("/api/2.0/rest/equipment.xml", params));
+    	//System.out.println(client.post("/api/2.0/rest/equipment.xml", params));
     	
     	//Update an existing equipment resource by changing the model to 'X4000'
     	/*

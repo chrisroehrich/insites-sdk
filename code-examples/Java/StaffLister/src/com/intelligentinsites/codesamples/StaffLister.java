@@ -39,7 +39,7 @@ public class StaffLister extends HttpServlet {
      * Default constructor. 
      */
     public StaffLister() {
-        inSitesConnection = new APIClient("insites-dev.intelligentinsites.net", "username", "password");
+        inSitesConnection = new APIClient(APIClient.URIScheme.HTTPS, "insites.dev.insitescloud.com", "username", "password", 443);
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

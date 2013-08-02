@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class EquipmentCreator {
     public static void main(String[] args) {
-        APIClient client = new APIClient("insites-dev.intelligentinsites.net", "username", "password");
+        APIClient client = new APIClient(APIClient.URIScheme.HTTPS, "insites.dev.insitescloud.com", "username", "password", 443);
 
         System.out.println("Creating a new equipment resource...");
 
