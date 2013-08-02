@@ -1,0 +1,16 @@
+<html>
+<body>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+        #foreach( $equipmentItem in $equipmentList )
+            <tr>
+                <td>$equipmentItem[0]</td>
+                <td>$equipmentItem[1]</td>
+            </tr>
+        #end
+    </table>
+</body>
+</html>

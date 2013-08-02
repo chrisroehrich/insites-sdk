@@ -3,4 +3,5 @@ insites-sdk
 
 InSites SDK and Developer Documentation
 
-The latest development version of the SDK can be found here: https://github.com/IntelligentInSitesDev/insites-sdk/tree/next. Contributions to this project should be made in that repository.
+For API reference documentation, visit [https://doc.intelligentinsites.net/4.3/devdoc](https://doc.intelligentinsites.net/4.3/devdoc)
+For questions and support, check out the [developer forum](https://support.intelligentinsites.com/categories/20025292-Developer-Resources)

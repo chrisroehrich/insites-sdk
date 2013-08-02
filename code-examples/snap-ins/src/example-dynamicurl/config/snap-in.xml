@@ -1,0 +1,69 @@
+<!--
+  ~ Copyright (c) Intelligent InSites. All rights reserved.
+  ~ http://www.intelligentinsites.com
+  -->
+
+<snap-in
+        xmlns="http://www.intelligentinsites.com/xml/ns/snap-in"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.intelligentinsites.com/xml/ns/snap-in  http://www.intelligentinsites.com/xml/ns/snap-in-v1.2.xsd"
+
+        provider="example" id="example-dynamicurl">
+    <name>Dynamic Page URL</name>
+    <summary></summary>
+    <description>An example snap-in showing a way to configure pages with different URLs depending on the current user's primary location.</description>
+    <version>${snapin.version}</version>
+    <vendor>
+        <name>Intelligent InSites</name>
+        <address>102 Broadway</address>
+        <address>Suite 200</address>
+        <address>Fargo, ND</address>
+        <support-email>support@IntelligentInSites.com</support-email>
+        <support-phone>(866) 520-9113</support-phone>
+        <support-message></support-message>
+    </vendor>
+    <dependencies>
+        <platform versions="4.3"/>
+    </dependencies>
+    <web>
+        <tabs>
+            <tab id="example-tab-dynamicurl">
+                <name>Dynamic URL Example</name>
+                <icon>/snap-in/example/dynamicurl/web/icon.png</icon>
+            </tab>
+        </tabs>
+		<page id="example-dynamicurl-page-main" tab="example-tab-dynamicurl">
+            <name>Example Page</name>
+            <content type="iframe">
+                <view ui="core-ui-default">/snap-in/example/dynamicurl/service/index.html</view>
+            </content>
+        </page>
+        <page id="example-dynamicurl-page-config" tab="example-tab-dynamicurl" section="admin">
+            <name>Configuration</name>
+            <content type="iframe">
+                <view ui="core-ui-default">/snap-in/example/dynamicurl/service/config.html</view>
+            </content>
+        </page>
+    </web>
+
+    <services>
+        <service>
+            <script>index.rb</script>
+            <get>index.html</get>
+        </service>
+        <service>
+            <script>config.rb</script>
+            <get>config.html</get>
+        </service>
+        <service>
+            <script>location_tree.rb</script>
+            <get>location_tree.html</get>
+        </service>
+    </services>
+
+    <data>
+        <resource name="location">
+            <attribute name="url" element-type="string"/>
+        </resource>
+    </data>
+</snap-in>

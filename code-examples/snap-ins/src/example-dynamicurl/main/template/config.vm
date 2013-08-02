@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuration</title>
+    <link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/global.css" />
+    <script type="text/javascript" src="/snap-in/core/weblib/web/js/jquery/jquery-1.9.min.js"></script>
+    <!--[if IE 7]><link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/ie7.css" /><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/ie8.css" /><![endif]-->
+    <script type="text/javascript" src="/snap-in/example/dynamicurl/web/js/jQuery.tree.js"></script>
+    <script type="text/javascript">
+
+        var location_id;
+        $(function() {
+            $('#url-edit').hide();
+            $('#locations').tree({
+                url:'location_tree.html',
+                query:'location_id'
+            });
+            $('#locations').find('li:eq(0)>a').trigger('expand');
+            $('form#url-edit-form').submit(function() {
+                $(this).append("<input type='hidden' name='location_id' value='"+location_id+"'/>");
+            });
+        });
+
+        function editPressed() {
+            location_id = get_selected_id('#locations');
+            if(!location_id) {
+                alert('Select a valid location.');
+                return false;
+            }
+            $('body').find('h2:eq(0)').text(get_selected('#locations').text());
+            $('#url-edit').show();
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+<div class="wrapper-content">
+
+    <div class="header-text clear-fix">
+        <h1 class="flt-left">Configure Hostnames for Facilities</h1>
+    </div>
+
+    #if ($success)
+        <p>$success</p>
+    #elseif ($error)
+        <p style="color: #FF0000;">$error</p>
+    #end
+
+    <div class="form-wrapper" id="url-edit"">
+        <h2 class="section-header"></h2>
+        <form id="url-edit-form" action="$request_url" >
+            <fieldset class="fieldset-section">
+                <p class="fields-row">
+                    <label for="url" >New URL:</label>
+                    <input type="text" id="url"  name="new_url" class="txtbox-big" title="New URL" />
+                </p>
+            </fieldset>
+            <div class="min-margin-left-bottom">
+                <input type="submit" class="button" value="Save" title="Save the new URL" />
+            </div>
+        </form>
+    </div>
+
+    <div class="form-wrapper">
+        <h2 class="section-header">Select a Location</h2>
+        <ul id="locations">
+            <li id="$enterprise_id">
+                <a href='#'>$enterprise_name</a>
+                <ul></ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="button-panel">
+        <form id="locations-form" onSubmit="editPressed(); return false;" >
+            <input type="submit" class="button" value="Edit" title="Edit the selected location's URL" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

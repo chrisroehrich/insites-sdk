@@ -6,9 +6,9 @@
 <snap-in
         xmlns="http://www.intelligentinsites.com/xml/ns/snap-in"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.intelligentinsites.com/xml/ns/snap-in http://www.intelligentinsites.com/xml/ns/snap-in.xsd"
+        xsi:schemaLocation="http://www.intelligentinsites.com/xml/ns/snap-in http://www.intelligentinsites.com/xml/ns/snap-in-v1.2.xsd"
 
-        provider="insites" id="example">
+        provider="insites" id="insites-example">
     <name>InSites Example Snapin</name>
     <summary></summary>
     <description></description>
@@ -23,7 +23,7 @@
         <support-message></support-message>
     </vendor>
     <dependencies>
-        <platform versions="4.0"/>
+        <platform versions="4.3"/>
     </dependencies>
     <web>
         <tabs>
@@ -35,7 +35,7 @@
         <page id="insites-example-page-staff" tab="insites-tab-example">
             <name>Staff Lister</name>
             <content type="iframe">
-                <view>http://localhost:8080/StaffLister/</view>
+                <view ui="core-ui-default">http://localhost:8080/StaffLister/</view>
             </content>
         </page>
     </web>
