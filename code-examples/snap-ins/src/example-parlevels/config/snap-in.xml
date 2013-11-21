@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright (c) Intelligent InSites. All rights reserved.
+  ~ http://www.intelligentinsites.com
+  -->
+
+<snap-in
+        xmlns="http://www.intelligentinsites.com/xml/ns/snap-in"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.intelligentinsites.com/xml/ns/snap-in http://www.intelligentinsites.com/xml/ns/snap-in-v1.3.xsd"
+
+        provider="example" id="example-parlevels">
+    <name>Par Levels Example</name>
+    <summary></summary>
+    <description></description>
+    <version>1.0</version>
+    <vendor>
+        <name>Intelligent InSites</name>
+        <address>102 Broadway</address>
+        <address>Suite 200</address>
+        <address>Fargo, ND</address>
+        <support-email>support@IntelligentInSites.com</support-email>
+        <support-phone>(866) 520-9113</support-phone>
+        <support-message></support-message>
+    </vendor>
+    <dependencies>
+        <platform versions="4.4"/>
+    </dependencies>
+    <web>
+        <tabs>
+            <tab id="example-tab-parlevels">
+                <name>Par Levels Example</name>
+                <icon>/web/icon.png</icon>
+            </tab>
+        </tabs>
+        <page id="example-parlevels-page-statuses" tab="example-tab-parlevels">
+            <name>Par Levels</name>
+            <content type="iframe">
+                <view ui="core-ui-default">/snap-in/example/parlevels/service/index.html</view>
+            </content>
+        </page>
+    </web>
+
+    <services>
+        <service>
+            <script>index.rb</script>
+            <get>index.html</get>
+        </service>
+        <service>
+            <script>location_tree.rb</script>
+            <get>location_tree.html</get>
+        </service>
+        <service>
+            <script>generate_tables.rb</script>
+            <get>generate_tables.html</get>
+        </service>
+    </services>
+</snap-in>

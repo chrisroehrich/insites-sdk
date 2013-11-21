@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuration</title>
+    <link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/global.css" />
+    <script type="text/javascript" src="/snap-in/core/weblib/web/js/jquery/jquery-1.9.min.js"></script>
+    <!--[if IE 7]><link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/ie7.css" /><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" type="text/css" href="/snap-in/core/accessible/web/css/ie8.css" /><![endif]-->
+    <script type="text/javascript" src="/snap-in/example/parlevels/web/js/jQuery.tree.js"></script>
+    <script type="text/javascript">
+
+        var location_id;
+        //Force the iframe to auto scroll
+        if (window.frameElement.scrolling == 'no') {
+            window.frameElement.scrolling = 'yes';
+            window.frameElement.src = window.location.protocol + '//' + window.location.host + '/snap-in/example/parlevels/service/index.html';
+            window.location.reload();
+        }
+        $(function() {
+            $('#locations').tree({
+                url:'location_tree.html',
+                query:'location_id'
+            });
+            $('#locations').find('li:eq(0)>a').trigger('expand');
+        });
+
+        function searchPressed() {
+            $('#par-results').text("Loading...");
+            location_id = get_selected_id('#locations');
+            if(!location_id) {
+                alert('Select a valid location.');
+                return false;
+            }
+            search_term = $('#search_term').val();
+            $('#par-results').load('/snap-in/example/parlevels/service/generate_tables.html?location_id=' + location_id + '&search=' + search_term);
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+<div class="wrapper-content">
+
+    <div class="header-text clear-fix">
+        <h1 class="flt-left">Par Levels by Location</h1>
+    </div>
+
+    #if ($success)
+        <p>$success</p>
+    #elseif ($error)
+        <p style="color: #FF0000;">$error</p>
+    #end
+
+    <div class="form-wrapper">
+        <h2 class="section-header">Select a Location</h2>
+        <ul id="locations">
+            <li id="$enterprise_id">
+                <a href='#'>$enterprise_name</a>
+                <ul></ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="button-panel">
+        <form id="locations-form" onSubmit="searchPressed(); return false;" >
+            <label for="url" >Search term:</label>
+            <input type="text" id="search_term"  name="txtbox-big" class="txtbox-big" title="Enter Search Term" />
+            <input type="submit" id="search_button" class="button" value="Search" title="Find par levels" />
+        </form>
+    </div>
+
+    <div id="par-results"></div>
+</div>
+</body>
+</html>
