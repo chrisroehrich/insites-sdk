@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'set'
 
 @log = @sandbox.log('generate_tables')
 
@@ -15,11 +16,11 @@ begin
   request_params = @sandbox.request.get_parameters
 
   #Get the location's name
-  xml = Nokogiri::XML(@sandbox.httpGet("/api/2.0/rest/locations/#{request_params['location_id']}.xml", {'select' => 'name,location-types.id'}))
-  location_name = xml.xpath('insites:location/name').text()
+  location_xml = Nokogiri::XML(@sandbox.httpGet("/api/2.0/rest/locations/#{request_params['location_id']}.xml", {'select' => 'name,location-types.id'}))
+  location_name = location_xml.xpath('insites:location/name').text()
 
   #Find all par-levels associated with this location
-  location_types = xml.xpath('insites:location/location-types/value/@id')
+  location_types = location_xml.xpath('insites:location/location-types/value/@id')
   filter_param = "applies-to-each-location eq 'true' and (location-type.id eq ''"
   location_types.each do |type|
     filter_param << " or location-type.id eq '#{type.text()}'"
@@ -30,30 +31,20 @@ begin
   #Find the total count, and par level range of each equipment/supply type in this location
   total_counts = Hash.new
   #First, find entities in this location that match the search term
-  entities_xml = Nokogiri::XML(@sandbox.httpGet('/api/2.0/rest/entities.xml', {'filter' => "(this matches '#{request_params['search']}' and current-location in '#{request_params['location_id']}') and (element-type eq 'equipment' or element-type eq 'supply')",
-                                                                               'select' => 'type.id',
+  entity_types_xml = Nokogiri::XML(@sandbox.httpGet('/api/2.0/rest/entity-types.xml', {'filter' =>"element-type eq 'equipment-type' or element-type eq 'supply-type'", 'select' => 'id,name'}))
+  entities_in_location_xml = Nokogiri::XML(@sandbox.httpGet('/api/2.0/rest/entities.xml', {'filter' => "(this matches '#{request_params['search']}' and current-location in '#{request_params['location_id']}') and (element-type eq 'equipment' or element-type eq 'supply')",
+                                                                               'select' => 'type.id, type.parent-hierarchy.id',
                                                                                'limit' => -1}))
   #Get a list of the entity-types corresponding to the matched entities
-  entity_types = entities_xml.xpath('insites:list-response/value/type/@id')
-  filter_param = "(current-location in '#{request_params['location_id']}') and (element-type eq 'equipment' or element-type eq 'supply') and (type.id eq ''"
-  entity_types.each do |type|
-    filter_param << " or type.id eq '#{type.text()}'"
-  end
-  filter_param << ')'
-  #Find entities in this location corresponding to those entity-types
-  entities_xml = Nokogiri::XML(@sandbox.httpGet('/api/2.0/rest/entities.xml', {'filter' => filter_param,
-                                                                               'select' => 'type.id, type.name, type.parent-hierarchy.id, type.parent-hierarchy.name',
-                                                                               'limit' => -1}))
-  entity_location_types = entities_xml.xpath('insites:list-response/value/type')
-  entity_location_types.each do |entity_type|
-    entity_type_id = entity_type.xpath('@id').text()
-    total_counts = add_type_to_counts(total_counts, entity_type_id, entity_type.xpath('name').text(), par_levels_xml.xpath("insites:list-response/value[entity-type/@id='#{entity_type_id}']/min").text(), par_levels_xml.xpath("insites:list-response/value[entity-type/@id='#{entity_type_id}']/max").text())
-    #This entity-type might have ancestors. We want to count this entity as being one of those types too.
-    ancestors = entity_type.xpath('parent-hierarchy/value')
-    ancestors.each do |entity_type_ancestor|
-      entity_type_id = entity_type_ancestor.xpath('@id').text()
-      total_counts = add_type_to_counts(total_counts, entity_type_id, entity_type_ancestor.xpath('name').text(), par_levels_xml.xpath("insites:list-response/value[entity-type/@id='#{entity_type_id}']/min").text(), par_levels_xml.xpath("insites:list-response/value[entity-type/@id='#{entity_type_id}']/max").text())
-    end
+  entity_types_in_location = entities_in_location_xml.xpath('insites:list-response/value/type/@id | insites:list-response/value/type/parent-hierarchy/value/@id')
+  entity_types_in_location.to_a.map!(&:text)
+  entity_types_in_location = entity_types_in_location.to_set
+  entity_types_in_location.each do |entity_type_id|
+    entities_xml = Nokogiri::XML(@sandbox.httpGet('/api/2.0/rest/entities.xml', {'filter' => "(current-location in '#{request_params['location_id']}') and (element-type eq 'equipment' or element-type eq 'supply') and type in '#{entity_type_id}'",
+                                                                                 'limit' => 0}))
+    par_min = par_levels_xml.xpath("insites:list-response/value[entity-type/@id='#{entity_type_id}']/min").text()
+    par_max = par_levels_xml.xpath("insites:list-response/value[entity-type/@id='#{entity_type_id}']/max").text()
+    total_counts[entity_type_id] = {'name' => entity_types_xml.xpath("insites:list-response/value[@id='#{entity_type_id}']/name").text(), 'count' => entities_xml.xpath('insites:list-response/@total-count').text().to_i, 'parMin' => par_min.eql?('') ? nil : par_min.to_i , 'parMax' => par_max.eql?('') ? nil : par_max.to_i}
   end
 
   context = {'locationName' => location_name, 'entityTypes' => total_counts}
