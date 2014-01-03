@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -jar snapin-compiler.jar $@
+exec java -jar snapin-compiler.jar "$@"
